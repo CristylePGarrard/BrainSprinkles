@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BrainSprinkles ✨</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">🌈</span><div><strong>BrainSprinkles</strong><small>a cozy place for everything in your head</small></div></div>
+    <div class="top-actions"><span id="saveStatus" class="save-status">● Saved on this computer</span><button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button></div>
+  </header>
+  <div class="workspace">
+    <aside class="sidebar">
+      <button class="new-btn" id="newBtn">＋ New brain dump</button>
+      <div class="side-label">YOUR LITTLE UNIVERSE</div>
+      <button class="nav-item active" data-kind="All"><span>✍️</span> Everything <b id="allCount">0</b></button>
+      <button class="nav-item" data-kind="To-do"><span>☑️</span> To-dos</button>
+      <button class="nav-item" data-kind="Idea"><span>💡</span> Ideas</button>
+      <button class="nav-item" data-kind="Memory"><span>📔</span> Memories</button>
+      <button class="nav-item" data-kind="Thought"><span>💭</span> Thoughts</button>
+      <button class="nav-item" data-kind="Project"><span>🪄</span> Projects</button>
+      <div class="side-divider"></div>
+      <div class="side-label">A LITTLE MAGIC</div>
+      <div class="mascot-card"><div class="mascots">🦄 ☕ 🐶</div><strong>You've got this!</strong><p>One thought at a time. The rest can wait.</p></div>
+      <div class="local-note"><span class="pulse"></span> Your notes live on this computer.</div>
+    </aside>
+    <main class="main-area">
+      <section class="list-pane">
+        <div class="list-heading"><div><span class="eyebrow">YOUR THOUGHTS</span><h1 id="listTitle">Everything</h1></div><span class="count-pill" id="listCount">0 notes</span></div>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Find a thought..." autocomplete="off"></div>
+        <div id="entryList" class="entry-list"></div>
+        <div id="emptyList" class="empty-list"><div>🌱</div><strong>A fresh little universe</strong><p>Your thoughts will show up here.</p></div>
+      </section>
+      <section class="editor-pane">
+        <div class="editor-top"><span class="eyebrow">THE BLANK PAGE IS YOURS</span><span class="autosave" id="editorSave">✦ Ready when you are</span></div>
+        <input id="entryTitle" class="title-input" placeholder="Give this thought a name (optional)">
+        <textarea id="entryBody" class="body-input" placeholder="What's on your mind?&#10;&#10;A brilliant idea? Something you need to remember? A list of things to do? A completely random thought?&#10;&#10;Just start typing. ✨"></textarea>
+        <div class="editor-footer">
+          <div class="editor-controls">
+            <label class="select-label">THIS IS A
+              <select id="entryKind"><option>Thought</option><option>To-do</option><option>Idea</option><option>Memory</option><option>Project</option><option>Journal</option></select>
+            </label>
+            <input id="tagInput" placeholder="Add tags, press Enter">
+          </div>
+          <div class="footer-actions"><button id="connectBtn" class="soft-btn" disabled>🔗 Connect</button><button id="favoriteBtn" class="soft-btn" disabled>♡ Favorite</button><button id="deleteBtn" class="danger-btn" disabled>Delete</button></div>
+        </div>
+        <div id="tagList" class="tag-list"></div>
+        <div id="connections" class="connections"></div>
+      </section>
+      <aside class="right-rail">
+        <div class="rail-card"><div class="rail-title">🧵 Connected thoughts</div><p class="rail-hint">Little threads between ideas.</p><div id="connectionList" class="connection-list"><div class="rail-empty">Select a note to see its connections.</div></div></div>
+        <div class="rail-card coffee-card"><div class="coffee-art">☕</div><strong>Brain fuel</strong><p>Take a sip. Let your brain wander.</p><span>Made with extra sprinkles ✨</span></div>
+      </aside>
+    </main>
+  </div>
+</div>
+<div id="modal" class="modal hidden"><div class="modal-card"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+<script src="/static/app.js"></script>
+</body></html>
