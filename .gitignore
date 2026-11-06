@@ -10,3 +10,9 @@ data/*.sqbpro
 # IDE files
 *.iml
 .idea/
+# PyInstaller build output
+build/
+dist/
+*.spec.bak
+# Generated icon assets
+assets/BrainSprinkles.iconset/
