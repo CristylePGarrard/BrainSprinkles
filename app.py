@@ -1,11 +1,20 @@
 from flask import Flask, render_template, request, jsonify
 from pathlib import Path
+from platformdirs import user_data_path
 import sqlite3, uuid, json
 from datetime import datetime, timezone
 
 BASE = Path(__file__).resolve().parent
-DB_PATH = BASE / "data" / "brain_sprinkles.db"
-DB_PATH.parent.mkdir(exist_ok=True)
+
+# Original database location, used for first-launch migration.
+LEGACY_DB_PATH = BASE / "data" / "brain_sprinkles.db"
+
+# Application Support location.
+DATA_DIR = user_data_path("BrainSprinkles", appauthor=False)
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+DB_PATH = DATA_DIR / "brain_sprinkles.db"
+
 app = Flask(__name__)
 
 def now():
@@ -15,6 +24,25 @@ def db():
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     return con
+
+def migrate_legacy_database():
+    """Copy the old project database into Application Support on first launch."""
+
+    if DB_PATH.exists():
+        print(f"Using existing database: {DB_PATH}")
+        return
+
+    if LEGACY_DB_PATH.exists():
+        print("Migrating existing BrainSprinkles database...")
+
+        with sqlite3.connect(LEGACY_DB_PATH) as source:
+            with sqlite3.connect(DB_PATH) as destination:
+                source.backup(destination)
+
+        print(f"Database migrated to: {DB_PATH}")
+
+    else:
+        print("No existing database found. Creating a new one.")
 
 def init_db():
     with db() as con:
@@ -49,6 +77,7 @@ def init_db():
             attempts INTEGER NOT NULL DEFAULT 0
         );
         """)
+migrate_legacy_database()
 init_db()
 
 def queue(con, entity_type, entity_id, action, payload):

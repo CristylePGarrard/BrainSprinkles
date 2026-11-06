@@ -6,3 +6,7 @@ data/*.sqlite
 data/*.sqlite3
 .DS_Store
 .env
+data/*.sqbpro
+# IDE files
+*.iml
+.idea/
