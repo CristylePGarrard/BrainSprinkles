@@ -61,4 +61,3 @@ app = BUNDLE(
         "NSHighResolutionCapable": True,
     },
 )
-
